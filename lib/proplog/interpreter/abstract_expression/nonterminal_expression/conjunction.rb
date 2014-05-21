@@ -1,5 +1,8 @@
 class Conjunction < NonterminalExpression
-  def operand
-    "∧"
+
+  def initialize(left, right)
+    @operand = "∧"
+    super
   end
+
 end

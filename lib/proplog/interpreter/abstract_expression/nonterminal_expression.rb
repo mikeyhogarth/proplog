@@ -1,4 +1,6 @@
 class NonterminalExpression < AbstractExpression
+  attr_reader :left, :right
+
   def initialize(left, right)
     @left = left
     @right = right
@@ -8,8 +10,5 @@ class NonterminalExpression < AbstractExpression
     "#{@left.to_s} #{operand} #{@right.to_s}"
   end
 
-  def operand
-    "?"
-  end
 end
 

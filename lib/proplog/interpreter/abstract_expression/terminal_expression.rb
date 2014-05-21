@@ -1,0 +1,2 @@
+class TerminalExpression < AbstractExpression
+end

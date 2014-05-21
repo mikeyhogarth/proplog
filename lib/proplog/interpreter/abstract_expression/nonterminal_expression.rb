@@ -7,7 +7,7 @@ class NonterminalExpression < AbstractExpression
   end
 
   def to_s
-    "#{@left.to_s} #{operand} #{@right.to_s}"
+    "(#{@left.to_s} #{operand} #{@right.to_s})"
   end
 
 end

@@ -8,6 +8,7 @@ end
 
 
 require "proplog/interpreter/abstract_expression/terminal_expression"
+require "proplog/interpreter/abstract_expression/terminal_expression/negation"
 
 require "proplog/interpreter/abstract_expression/nonterminal_expression"
 require "proplog/interpreter/abstract_expression/nonterminal_expression/conjunction"

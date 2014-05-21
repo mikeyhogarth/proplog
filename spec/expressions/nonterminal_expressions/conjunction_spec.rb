@@ -1,10 +1,11 @@
 require "spec_helper"
 
 describe Conjunction do
+  subject { Conjunction.new("left", "right") }
+
   describe "#to_s" do
     it "returns the conjunction in string form" do
-      expression = Conjunction.new("left", "right")
-      expect(expression.to_s).to eq "left ∧ right"
+      expect(subject.to_s).to eq "left ∧ right"
     end
   end
 end

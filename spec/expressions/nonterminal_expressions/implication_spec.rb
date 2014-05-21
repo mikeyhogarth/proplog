@@ -1,9 +1,7 @@
 require "spec_helper"
 
 describe Implication do
-
-
-  subject (:expression) { Implication.new("left", "right") }
+  subject { Implication.new("left", "right") }
 
   describe "#to_s" do
     it "returns the conjunction in string form" do

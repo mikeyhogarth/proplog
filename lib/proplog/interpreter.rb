@@ -1,1 +1,1 @@
-require "proplog/interpreter/abstract_expression"
+require "proplog/interpreter/expression"

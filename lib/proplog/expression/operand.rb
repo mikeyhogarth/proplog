@@ -1,3 +1,9 @@
+#
+# Operand
+#
+# Responsible for figuring out which operand to use based on the class
+# name.
+#
 module Proplog
   module Expression
     module Operand

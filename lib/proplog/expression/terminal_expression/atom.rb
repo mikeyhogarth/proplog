@@ -1,6 +1,6 @@
 module Proplog
   module Expression
-    class Atom
+    class Atom < TerminalExpression
     end
   end
 end

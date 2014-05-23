@@ -1,7 +1,6 @@
 require "spec_helper"
 
 module Proplog
-
   describe Expression::Disjunction do
     subject { Expression::Disjunction.new("left", "right") }
   

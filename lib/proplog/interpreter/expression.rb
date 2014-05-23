@@ -1,7 +1,0 @@
-require "proplog/interpreter/expression/abstract_expression"
-require "proplog/interpreter/expression/terminal_expression"
-require "proplog/interpreter/expression/terminal_expression/negation"
-require "proplog/interpreter/expression/nonterminal_expression"
-require "proplog/interpreter/expression/nonterminal_expression/conjunction"
-require "proplog/interpreter/expression/nonterminal_expression/disjunction"
-require "proplog/interpreter/expression/nonterminal_expression/implication"

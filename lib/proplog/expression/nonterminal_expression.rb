@@ -3,9 +3,15 @@ module Proplog
     class NonterminalExpression < AbstractExpression
       attr_reader :left, :right
     
+      #
+      # Constructor
+      #
+      # Left and Right will either be expressions, or will be cast
+      # to expressions (Atoms)
+      #
       def initialize(left, right)
-        @left = left
-        @right = right
+        @left = left.kind_of?(AbstractExpression) ? left : Atom.new(left)
+        @right = right.kind_of?(AbstractExpression) ? right : Atom.new(right)
       end
     
       def to_s

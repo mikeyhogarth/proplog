@@ -7,3 +7,5 @@ require "proplog/expression/nonterminal_expression"
 require "proplog/expression/nonterminal_expression/conjunction"
 require "proplog/expression/nonterminal_expression/disjunction"
 require "proplog/expression/nonterminal_expression/implication"
+
+require "proplog/expression/parser"

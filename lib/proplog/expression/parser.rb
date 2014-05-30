@@ -15,13 +15,19 @@ module Proplog
 
       OPERATORS = {
         "&" => :conjunction,
-        "|" => :disjunction
+        "&&" => :conjunction,
+        "AND" => :conjunction,
+        "|" => :disjunction,
+        "||" => :disjunction,
+        "OR" => :disjunction,
+        "->" => :implication
       }
 
       def parse_expression(str)
         initialize_stacks
         build_stacks(str)
-        finalize_stacks
+        @operator_stack.count.times { pop_and_parse }
+
         return @output_stack[0]
       end
 
@@ -40,21 +46,20 @@ module Proplog
         end
       end
 
-      def finalize_stacks
-        @operator_stack.count.times do
-          op      = @operator_stack.pop
-          right   = @output_stack.pop
-          left    = @output_stack.pop
-          perform_parsing(op, left, right)
-        end
-      end
+      def pop_and_parse
+        #pop
+        op      = @operator_stack.pop
+        right   = @output_stack.pop
+        left    = @output_stack.pop
 
-      def perform_parsing(op, left, right)
+        #and parse
         case op
         when :conjunction
           @output_stack << Expression::Conjunction.new(left, right)
         when :disjunction
           @output_stack << Expression::Disjunction.new(left, right)
+        when :implication
+          @output_stack << Expression::Implication.new(left, right)
         end
       end
 

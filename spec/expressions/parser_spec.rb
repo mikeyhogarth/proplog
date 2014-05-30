@@ -8,10 +8,6 @@ module Proplog
         unparsed_expression = "hello & world"
         expression = Expression::Parser.parse(unparsed_expression)
         expect(expression).to be_an Expression::Conjunction
-        expect(expression.left).to be_an Expression::Atom
-        expect(expression.right).to be_an Expression::Atom
-        expect(expression.left.value).to eq "hello"
-        expect(expression.right.value).to eq "world"
       end
     end
 
@@ -20,10 +16,14 @@ module Proplog
         unparsed_expression = "hello | world"
         expression = Expression::Parser.parse(unparsed_expression)
         expect(expression).to be_an Expression::Disjunction
-        expect(expression.left).to be_an Expression::Atom
-        expect(expression.right).to be_an Expression::Atom
-        expect(expression.left.value).to eq "hello"
-        expect(expression.right.value).to eq "world"
+      end
+    end
+
+    context "when given an implication" do
+      it "should parse it correctly into an implication" do
+        unparsed_expression = "hello -> world"
+        expression = Expression::Parser.parse(unparsed_expression)
+        expect(expression).to be_an Expression::Implication
       end
     end
 

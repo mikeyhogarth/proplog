@@ -8,9 +8,7 @@ module Proplog
           value = "value"
 
           expression = Expression::TerminalExpression.new(value)
-
-          expect(expression.value).to be_an Expression::Atom
-          expect(expression.value.value).to eq value
+          expect(expression.value).to eq "value"
         end
       end 
     end

@@ -32,6 +32,7 @@ module Proplog
         unparsed_expression = "foo"
         expression = Expression::Parser.parse(unparsed_expression)
         expect(expression).to be_an Expression::Atom
+        expect(expression.value).to eq "foo"
       end
     end
 
@@ -40,6 +41,26 @@ module Proplog
         unparsed_expression = "!foo"
         expression = Expression::Parser.parse(unparsed_expression)
         expect(expression).to be_an Expression::Negation
+        expect(expression.value).to eq "foo"
+      end
+    end
+
+    context "when given a complex expression" do
+      it "parses it correctly, accounting for priority" do
+        unparsed_expression = "p AND q -> !r OR q"
+        expression = Expression::Parser.parse(unparsed_expression)
+        expect(expression).to be_an Expression::Implication
+        expect(expression.left).to be_an Expression::Conjunction
+        expect(expression.right).to be_an Expression::Disjunction
+      end
+
+      it "prioritises conjunction over disjunction" do
+        unparsed_expression = "p & q | h"
+        expression = Expression::Parser.parse(unparsed_expression)
+        expect(expression).to be_an Expression::Conjunction
+        expect(expression.right).to be_an Expression::Disjunction
+        expect(expression.left).to be_an Expression::Atom
+
       end
     end
 

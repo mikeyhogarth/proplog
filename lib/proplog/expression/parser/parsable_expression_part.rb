@@ -23,7 +23,7 @@ module Proplog
         end
 
         def to_negation
-          Expression::Negation.new(@value)
+          Expression::Negation.new(@value[1..@value.length])
         end
 
         def to_atom

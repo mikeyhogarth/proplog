@@ -32,7 +32,6 @@ module Proplog
         unparsed_expression = "foo"
         expression = Expression::Parser.parse(unparsed_expression)
         expect(expression).to be_an Expression::Atom
-        expect(expression.value).to eq "foo"
       end
     end
 
@@ -41,7 +40,6 @@ module Proplog
         unparsed_expression = "!foo"
         expression = Expression::Parser.parse(unparsed_expression)
         expect(expression).to be_an Expression::Negation
-        expect(expression.value).to eq "foo"
       end
     end
 

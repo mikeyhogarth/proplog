@@ -4,31 +4,21 @@ module Proplog
 
       def self.parse(str)
         parser = Parser.new
-        return parser.parse(str)
+        parsable_expression = ParsableExpression.new(str)
+        return parser.parse(parsable_expression)
       end
 
       def parse(str)
-        parse_expression(str)
+        perform_parse(str)
       end
+
 
       private
 
-      OPERATOR_LOOKUP = {
-        "&" => :conjunction,
-        "&&" => :conjunction,
-        "AND" => :conjunction,
-        "|" => :disjunction,
-        "||" => :disjunction,
-        "OR" => :disjunction,
-        "->" => :implication
-      }
-
-      NEGATION_OPERATOR_LOOKUP = /[¬!]/
-
-      def parse_expression(str)
+      def perform_parse(parsable_expression)
         initialize_stacks
-        build_stacks(str)
-        @operator_stack.count.times { pop_and_parse }
+        build_stacks(parsable_expression)
+        @operator_stack.count.times { shunt! }
 
         return @output_stack[0]
       end
@@ -38,21 +28,21 @@ module Proplog
         @operator_stack  = Array.new
       end
 
-      def build_stacks(str)
-        str.split(" ").each do |item|
-          if OPERATOR_LOOKUP.keys.include? item
-            @operator_stack << OPERATOR_LOOKUP[item] 
+      def build_stacks(parsable_expression)
+        parsable_expression.parts.each do |part|
+          if part.operator?
+            @operator_stack << part.to_standardized_operator 
           else
-            if item =~ NEGATION_OPERATOR_LOOKUP
-              @output_stack << Expression::Negation.new(item)
+            if part.negated?
+              @output_stack << part.to_negation
             else
-              @output_stack << Expression::Atom.new(item)
+              @output_stack << part.to_atom
             end
           end
         end
       end
 
-      def pop_and_parse
+      def shunt!
         #pop
         op      = @operator_stack.pop
         right   = @output_stack.pop
@@ -71,4 +61,4 @@ module Proplog
 
     end
   end
-end
+  end

@@ -1,0 +1,17 @@
+module Proplog
+  module Expression
+    class Parser
+      class ParsableExpression
+        def initialize(str)
+          @parsable_string = str
+        end
+
+        def parts
+          @parsable_string.split(" ").map do |part|
+            ParsableExpressionPart.new(part)
+          end
+        end
+      end
+    end
+  end
+end

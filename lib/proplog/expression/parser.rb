@@ -13,7 +13,7 @@ module Proplog
 
       private
 
-      OPERATORS = {
+      OPERATOR_LOOKUP = {
         "&" => :conjunction,
         "&&" => :conjunction,
         "AND" => :conjunction,
@@ -22,6 +22,8 @@ module Proplog
         "OR" => :disjunction,
         "->" => :implication
       }
+
+      NEGATION_OPERATOR_LOOKUP = /[¬!]/
 
       def parse_expression(str)
         initialize_stacks
@@ -38,10 +40,14 @@ module Proplog
 
       def build_stacks(str)
         str.split(" ").each do |item|
-          if OPERATORS.keys.include? item
-            @operator_stack << OPERATORS[item] 
+          if OPERATOR_LOOKUP.keys.include? item
+            @operator_stack << OPERATOR_LOOKUP[item] 
           else
-            @output_stack << Expression::Atom.new(item)
+            if item =~ NEGATION_OPERATOR_LOOKUP
+              @output_stack << Expression::Negation.new(item)
+            else
+              @output_stack << Expression::Atom.new(item)
+            end
           end
         end
       end

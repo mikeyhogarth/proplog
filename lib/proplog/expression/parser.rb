@@ -5,7 +5,8 @@ module Proplog
       def self.parse(str)
         parser = Parser.new
         parsable_expression = ParsableExpression.new(str)
-        return parser.parse(parsable_expression)
+        SyntaxChecker.check_syntax(parsable_expression)
+        parser.parse(parsable_expression)
       end
 
       def parse(str)

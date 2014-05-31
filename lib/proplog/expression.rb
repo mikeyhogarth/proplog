@@ -16,4 +16,5 @@ require "proplog/expression/nonterminal_expression/implication"
 #
 require "proplog/expression/parser/parsable_expression_part"
 require "proplog/expression/parser/parsable_expression"
+require "proplog/expression/parser/syntax_checker"
 require "proplog/expression/parser"

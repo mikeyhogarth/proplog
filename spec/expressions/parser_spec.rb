@@ -58,9 +58,26 @@ module Proplog
         expect(expression).to be_an Expression::Conjunction
         expect(expression.right).to be_an Expression::Disjunction
         expect(expression.left).to be_an Expression::Atom
-
       end
     end
 
+    describe "invalid expressions" do
+      context "when some smarty pants tries to use parenthesis" do
+        it "raises a syntax error" do
+          unparsed_expression = "(foo AND bar)"
+          expect do 
+            Expression::Parser.parse(unparsed_expression)
+          end.to raise_error Expression::Parser::SyntaxError
+        end
+      end
+      context "when given an unbalanced expression" do
+        it "raises a syntax error" do
+          unparsed_expression = "hello world!"
+          expect do 
+            Expression::Parser.parse(unparsed_expression)
+          end.to raise_error Expression::Parser::SyntaxError
+        end
+      end
+    end
   end
 end

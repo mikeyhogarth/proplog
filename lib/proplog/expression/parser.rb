@@ -13,6 +13,12 @@ module Proplog
 
       private
 
+      OPERATOR_CLASSES = {
+        :conjunction => Expression::Conjunction,
+        :disjunction => Expression::Disjunction,
+        :implication => Expression::Implication
+      }
+
       OPERATOR_BINDING_PRIORITIES = {
         negation: 3,
         implication: 2,
@@ -34,26 +40,30 @@ module Proplog
       end
 
       def build_stacks(parsable_expression)
-        parsable_expression.tokens.each do |token|
-          if token.operator?
-            resolve_operator token
-          else
-            resolve_symbol token
-          end
+        parsable_expression.each_token do |token|
+          parse_token token
         end
       end
 
-      def resolve_operator(part)
-         op = part.to_standardized_operator
+      def parse_token(token)
+        if token.operator?
+          parse_operator token
+        else
+          parse_symbol token
+        end
+      end
+
+      def parse_operator(token)
+         op = token.to_standardized_operator
          shunt! if requires_early_shunting?(op)
          @operator_stack << op 
       end
 
-      def resolve_symbol(part)
-         if part.negated?
-           @output_stack << part.to_negation
+      def parse_symbol(token)
+         if token.negated?
+           @output_stack << token.to_negation
          else
-           @output_stack << part.to_atom
+           @output_stack << token.to_atom
          end
       end
 
@@ -61,15 +71,7 @@ module Proplog
         op      = @operator_stack.pop
         right   = @output_stack.pop
         left    = @output_stack.pop
-
-        case op
-        when :conjunction
-          @output_stack << Expression::Conjunction.new(left, right)
-        when :disjunction
-          @output_stack << Expression::Disjunction.new(left, right)
-        when :implication
-          @output_stack << Expression::Implication.new(left, right)
-        end
+        @output_stack << OPERATOR_CLASSES[op].new(left,right)
       end
 
       def requires_early_shunting?(op)

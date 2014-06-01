@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Proplog::VERSION
   spec.authors       = ["Mikey Hogarth"]
   spec.email         = ["mikehogarth20@hotmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{Propositional Logic in Ruby}
+  spec.summary       = %q{Represent, parse and evaluate propositional logic in ruby}
   spec.homepage      = ""
   spec.license       = "MIT"
 

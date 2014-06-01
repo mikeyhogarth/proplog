@@ -40,6 +40,27 @@ Expressions are built up like so:
     => "foo ∧ bar"
 
 
+### Parsing Expressions
+
+Proplog includes a simple expression parser for converting strings into expressions. Usage is like so:
+
+    parser = Proplog::Expression::Parser.new
+    parser.parse("foo & bar")
+
+a convinience method also exists at class level:
+
+    Proplog::Expression::Parser.parse("foo & bar")
+
+In its present form, spaces are important as these are what it uses to split up an expression.
+
+The parser will check syntax and intelligently establish binding precedence of the various operators. You can use "rubyish" syntax, verbose english syntax or actual propositional logic syntax and the parser will understand. Operators are therefore:
+
+    conjunction: "&", "&&", "AND" or "∧"
+    disjunction: "|", "||", "OR" or "∨"
+    implication: "->" or "→" 
+    negation: "!" or "¬"
+    
+
 ## Contributing
 
 1. Fork it

@@ -36,10 +36,13 @@ module Proplog
           "&" => :conjunction,
           "&&" => :conjunction,
           "AND" => :conjunction,
+          "∧" => :conjunction,
           "|" => :disjunction,
           "||" => :disjunction,
           "OR" => :disjunction,
-          "->" => :implication
+          "∨" => :disjunction,
+          "->" => :implication,
+          "→" => :implication
         }
 
         NEGATION_OPERATOR_LOOKUP = /[¬!]/

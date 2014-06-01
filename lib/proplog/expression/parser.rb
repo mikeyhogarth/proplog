@@ -60,7 +60,7 @@ module Proplog
       end
 
       def parse_symbol(token)
-         if token.negated?
+         if token.negation?
            @output_stack << token.to_negation
          else
            @output_stack << token.to_atom

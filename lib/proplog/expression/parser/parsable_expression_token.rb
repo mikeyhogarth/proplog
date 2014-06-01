@@ -10,7 +10,7 @@ module Proplog
           OPERATOR_LOOKUP.keys.include? @value
         end
 
-        def negated?    
+        def negation?    
           @value =~ NEGATION_OPERATOR_LOOKUP
         end
 

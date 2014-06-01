@@ -4,6 +4,7 @@ module Proplog
       class ParsableExpression
         def initialize(str)
           @parsable_string = str
+          SyntaxChecker.check_syntax self
         end
 
         def parts

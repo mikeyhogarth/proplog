@@ -64,18 +64,16 @@ module Proplog
     describe "invalid expressions" do
       context "when some smarty pants tries to use parenthesis" do
         it "raises a syntax error" do
-          unparsed_expression = "(foo AND bar)"
-          expect do 
-            Expression::Parser.parse(unparsed_expression)
-          end.to raise_error Expression::Parser::SyntaxError
+          %w{ [ ] ( ) { } }.each do |bracket_type| 
+            unparsed_expression = "#{bracket_type}foo AND bar"
+            expect { Expression::Parser.parse(unparsed_expression) }.to raise_error Expression::Parser::SyntaxError
+          end
         end
       end
       context "when given an unbalanced expression" do
         it "raises a syntax error" do
           unparsed_expression = "hello world!"
-          expect do 
-            Expression::Parser.parse(unparsed_expression)
-          end.to raise_error Expression::Parser::SyntaxError
+          expect { Expression::Parser.parse(unparsed_expression) }.to raise_error Expression::Parser::SyntaxError
         end
       end
     end

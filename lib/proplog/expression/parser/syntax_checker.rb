@@ -8,8 +8,7 @@ module Proplog
       class SyntaxChecker
 
         def self.check_syntax(parsable_expression)
-          syntax_checker = SyntaxChecker.new
-          syntax_checker.check_syntax(parsable_expression)
+          SyntaxChecker.new.check_syntax(parsable_expression)
         end
 
         def check_syntax(parsable_expression)
@@ -27,10 +26,7 @@ module Proplog
         end
 
         def expression_does_not_contain_parenthesis(parsable_expression)
-          ['(',')','[', ']', '}','{'].each do |bracket|
-            return false if parsable_expression.raw.include? bracket
-          end
-          true
+          !(parsable_expression.raw =~ /[\(\)\[\]\{\}]/)
         end
 
       end

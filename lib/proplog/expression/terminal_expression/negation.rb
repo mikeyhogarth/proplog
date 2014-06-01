@@ -1,6 +1,6 @@
 module Proplog
   module Expression
-    class Negation < TerminalExpression
+    class Negation < Atom
     end
   end
 end

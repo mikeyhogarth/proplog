@@ -22,7 +22,7 @@ module Proplog
         CHECKS = [:expression_is_balanced, :expression_does_not_contain_parenthesis]
 
         def expression_is_balanced(parsable_expression)
-          parsable_expression.parts.count.odd?
+          parsable_expression.tokens.count.odd?
         end
 
         def expression_does_not_contain_parenthesis(parsable_expression)

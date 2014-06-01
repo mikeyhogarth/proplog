@@ -34,11 +34,11 @@ module Proplog
       end
 
       def build_stacks(parsable_expression)
-        parsable_expression.parts.each do |part|
-          if part.operator?
-            resolve_operator part
+        parsable_expression.tokens.each do |token|
+          if token.operator?
+            resolve_operator token
           else
-            resolve_symbol part
+            resolve_symbol token
           end
         end
       end

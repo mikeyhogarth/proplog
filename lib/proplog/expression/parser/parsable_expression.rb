@@ -7,9 +7,9 @@ module Proplog
           SyntaxChecker.check_syntax self
         end
 
-        def parts
-          @parts ||= @parsable_string.split(" ").map do |part|
-            ParsableExpressionPart.new(part)
+        def tokens
+          @tokens ||= @parsable_string.split(" ").map do |token|
+            ParsableExpressionToken.new(token)
           end
         end
 

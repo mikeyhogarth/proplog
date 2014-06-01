@@ -1,7 +1,7 @@
 module Proplog
   module Expression
     class  Parser
-      class ParsableExpressionPart
+      class ParsableExpressionToken
         def initialize(value)
           @value = value
         end

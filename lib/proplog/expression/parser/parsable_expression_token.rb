@@ -1,6 +1,12 @@
+#
+# Proplog::Expression::Parser::ParsableExpressionToken
+#
+# Responsibility: Model representing a token within a parsable expression.
+#
 module Proplog
   module Expression
     class  Parser
+      private
       class ParsableExpressionToken
         def initialize(value)
           @value = value

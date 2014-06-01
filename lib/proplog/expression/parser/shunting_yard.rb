@@ -1,13 +1,16 @@
 #
-# Proplog::Expression::Parser::Shunter
+# Proplog::Expression::Parser::ShuntingYard
 #
 # Responsibility: Perform the shunting-yard algorithm upon a parsable expression, returning
 # the expression tree.
 #
+# http://en.wikipedia.org/wiki/Shunting-yard_algorithm
+#
 module Proplog
   module Expression
     class Parser
-      class Shunter
+      private
+      class ShuntingYard
         def parse(parsable_expression)
           initialize_stacks
           build_stacks(parsable_expression)

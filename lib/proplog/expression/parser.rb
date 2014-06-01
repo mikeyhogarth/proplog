@@ -13,8 +13,8 @@ module Proplog
 
       def parse(str)
         parsable_expression = ParsableExpression.new(str)
-        shunter = Shunter.new
-        shunter.parse(parsable_expression)
+        shunting_yard = ShuntingYard.new
+        shunting_yard.parse(parsable_expression)
       end
 
       private

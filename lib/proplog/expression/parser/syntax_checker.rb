@@ -1,3 +1,9 @@
+#
+# Proplog::Expression::Parser::SyntaxChecker
+#
+# Responsibility: Check the syntax for a parsable expression and raise a syntax error
+# if it does not conform to the correct syntax.
+#
 module Proplog
   module Expression
     class Parser
@@ -22,7 +28,7 @@ module Proplog
         CHECKS = [:expression_is_balanced, :expression_does_not_contain_parenthesis]
 
         def expression_is_balanced(parsable_expression)
-          parsable_expression.tokens.count.odd?
+          parsable_expression.token_count.odd?
         end
 
         def expression_does_not_contain_parenthesis(parsable_expression)

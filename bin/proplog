@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+
+if RUBY_VERSION >= '1.9.2'
+  $LOAD_PATH.unshift(File.dirname(File.realpath(__FILE__)) + '/../lib')
+
+  require 'proplog'
+
+  puts "Proplog #{Proplog::VERSION}"
+
+  exit 0 
+else
+  puts 'Proplog requires Ruby 1.9.2+'
+  exit(-1)
+end

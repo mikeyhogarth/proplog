@@ -42,6 +42,16 @@ module Proplog
         expect(expression).to be_an Expression::Negation
       end
     end
+    
+    context "when given atomics with spaces in them" do
+      it "figures out where the atomic ends/begins" do
+        unparsed_expression = "hello world && foo bar"
+        expression = Expression::Parser.parse(unparsed_expression)
+        expect(expression).to be_an Expression::Conjunction
+        expect(expression.left.value).to eq "hello world"
+        expect(expression.right.value).to eq "foo bar"
+      end
+    end
 
     context "when given a complex expression" do
       it "parses it correctly, accounting for priority" do
@@ -72,7 +82,7 @@ module Proplog
       end
       context "when given an unbalanced expression" do
         it "raises a syntax error" do
-          unparsed_expression = "hello world!"
+          unparsed_expression = "hello world! AND"
           expect { Expression::Parser.parse(unparsed_expression) }.to raise_error Expression::Parser::SyntaxError
         end
       end

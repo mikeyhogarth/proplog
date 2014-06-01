@@ -17,20 +17,6 @@ module Proplog
         shunting_yard.parse(parsable_expression)
       end
 
-      private
-
-      OPERATOR_CLASSES = {
-        :conjunction => Expression::Conjunction,
-        :disjunction => Expression::Disjunction,
-        :implication => Expression::Implication
-      }
-
-      OPERATOR_BINDING_PRIORITIES = {
-        negation: 3,
-        implication: 2,
-        conjunction: 1,
-        disjunction: 0
-      }
     end
   end
   end

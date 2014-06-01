@@ -8,8 +8,14 @@ module Proplog
     class  Parser
       private
       class ParsableExpressionToken
+        attr_reader :value
+
         def initialize(value)
           @value = value
+        end
+        
+        def concat(token)
+          @value << " #{token.value}"
         end
 
         def operator?

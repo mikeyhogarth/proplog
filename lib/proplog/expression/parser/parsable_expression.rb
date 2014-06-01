@@ -10,7 +10,6 @@ module Proplog
       class ParsableExpression
         def initialize(str)
           @parsable_string = str
-          @tokens_accessed = 0
           SyntaxChecker.check_syntax self
         end
 
@@ -19,9 +18,7 @@ module Proplog
         end
 
         def tokens
-          @tokens ||= @parsable_string.split(" ").map do |token|
-            ParsableExpressionToken.new(token)
-          end
+          @tokens ||= split_parsable_string_into_tokens
         end
 
         def token_count
@@ -32,6 +29,22 @@ module Proplog
           0.upto(tokens.size-1) do |i|
             yield tokens[i]
           end
+        end
+
+        private
+        def split_parsable_string_into_tokens
+          token_list = []
+
+          @parsable_string.split(/\s+/).each do |token|
+            new_token = ParsableExpressionToken.new(token)
+            if !new_token.operator? && (token_list.last && !token_list.last.operator?)
+              token_list.last.concat new_token
+            else
+              token_list << new_token
+            end
+          end
+
+          return token_list
         end
 
       end

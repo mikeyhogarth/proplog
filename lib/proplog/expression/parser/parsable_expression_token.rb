@@ -53,6 +53,7 @@ module Proplog
           "||" => :disjunction,
           "OR" => :disjunction,
           "∨" => :disjunction,
+          "THEREFORE" => :implication,
           "->" => :implication,
           "→" => :implication
         }

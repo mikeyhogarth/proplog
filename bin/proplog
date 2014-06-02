@@ -6,7 +6,8 @@ if RUBY_VERSION >= '1.9.2'
 
   require 'proplog'
 
-  puts "Proplog #{Proplog::VERSION}"
+  cli = Proplog::Cli.new
+  cli.run
 
   exit 0 
 else

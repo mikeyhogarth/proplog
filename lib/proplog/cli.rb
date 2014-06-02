@@ -10,13 +10,18 @@ module Proplog
     end
 
     def run
-      while(@exit != true)
-        input = ask "> "
-        parse input
+      begin
+        while(@exit != true)
+          input = ask "> "
+          parse input.strip
+        end
+      rescue EOFError
+        quit
       end
     end
 
     def parse(input)
+      return if input.nil? || input.length == 0
       command_array = input.split(' ')
       cmd = command_array[0].to_sym
       args = command_array[1..command_array.length]
@@ -39,11 +44,15 @@ module Proplog
 
     private
     def say_boldly msg
-      say "<%= color('#{msg}',:bold)%>"
+      say_color msg, :bold
     end
 
     def error msg
-      say "<%= color('#{msg}',:error)%>"
+      say_color msg, :error
+    end
+
+    def say_color(msg, color)      
+      say "<%= color('#{msg.gsub("'","")}', :#{color}) %>"
     end
 
     AVAILABLE_COMMANDS = [:posit, :quit]
